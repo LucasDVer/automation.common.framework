@@ -1,10 +1,5 @@
 package automation.common.framework.webdriver;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import java.io.File;
-import java.util.Collections;
-
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,14 +9,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class WebDriverFactory {
+import java.io.File;
+import java.util.Collections;
 
-    public WebDriver get() {
-        WebDriver driver = generateDriver();
-        driver.manage().timeouts().implicitlyWait(1, SECONDS);
-        driver.manage().window().maximize();
-        return driver;
-    }
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+public class WebDriverFactory {
 
     public static WebDriver generateDriver() {
         WebDriver driver;
@@ -50,6 +43,13 @@ public class WebDriverFactory {
                 driver = new ChromeDriver();
                 break;
         }
+        return driver;
+    }
+
+    public WebDriver get() {
+        WebDriver driver = generateDriver();
+        driver.manage().timeouts().implicitlyWait(1, SECONDS);
+        driver.manage().window().maximize();
         return driver;
     }
 
