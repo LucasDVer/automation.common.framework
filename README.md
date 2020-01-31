@@ -1,2 +1,2 @@
-# automation.common.library
+# automation.common.framework
 Repository containing a basic automation framework
