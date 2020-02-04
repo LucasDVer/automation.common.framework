@@ -1,10 +1,10 @@
-package automation.common.framework.webdriver;
+package com.travelocity.framework.webdriver;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
 @Sources("file:src/test/resources/webdriver.config")
-public interface WebdriverConfig extends Config {
+public interface WebDriverConfig extends Config {
 
     @Key("webdriver.browser")
     @DefaultValue("firefox")
@@ -17,7 +17,7 @@ public interface WebdriverConfig extends Config {
     String chromeDriver();
 
     @Key("webdriver.internetexplorerdriver")
-    String InternetExplorerDriver();
+    String internetExplorerDriver();
 
     @Key("reportConfigPath")
     String reportConfigPath();

@@ -1,16 +1,14 @@
-package automation.common.framework.webdriver;
+package com.travelocity.framework.webdriver;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import java.io.File;
-import java.util.Collections;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -18,7 +16,7 @@ public class WebDriverFactory {
 
     public static WebDriver generateDriver() {
         WebDriver driver;
-        WebdriverConfig config = ConfigFactory.create(WebdriverConfig.class);
+        WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class);
         String browser = config.browser().toUpperCase();
         switch (browser) {
             case "FIREFOX":
@@ -37,9 +35,6 @@ public class WebDriverFactory {
                 break;
             default:
                 System.setProperty("webdriver.chrome.driver", config.chromeDriver());
-                ChromeOptions options = new ChromeOptions();
-                options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-                options.setExperimentalOption("useAutomationExtension", false);
                 driver = new ChromeDriver();
                 break;
         }

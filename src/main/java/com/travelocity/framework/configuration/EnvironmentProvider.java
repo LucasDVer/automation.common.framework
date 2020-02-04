@@ -1,4 +1,4 @@
-package automation.common.framework.datamanagement;
+package com.travelocity.framework.configuration;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class EnvironmentProvider {
 
-    public static final String FILE_PATH = "environments.xlsx";
+    private static final String FILE_PATH = "environments.xlsx";
 
     private static String[] urls = new String[100];
 
@@ -32,7 +32,7 @@ public class EnvironmentProvider {
     }
 
     public static String getUrl(String description)
-            throws EncryptedDocumentException, InvalidFormatException, IOException {
+            throws IOException {
         setData();
         for (int i = 0; i < 100; i++) {
             if (urls[i].contains(description)) {
