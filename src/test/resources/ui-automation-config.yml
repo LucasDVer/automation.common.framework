@@ -1,0 +1,8 @@
+baseURL: https://www.travelocity.com
+remoteServerURL: http://localhost:4444/wd/hub
+appiumURL: https://www.travelocity.com
+implicitWait: 5
+explicitWait: 5
+pollingEvery: 2
+pageLoadTimeout: 60
+scriptTimeout: 2
