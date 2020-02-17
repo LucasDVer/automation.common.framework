@@ -7,6 +7,7 @@
     <groupId>automation.common</groupId>
     <artifactId>framework</artifactId>
     <version>1.0.1</version>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -14,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.10.1</jackson.version>
     </properties>
+
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -150,7 +152,6 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>4.1.2</version>
-            <scope>test</scope>
         </dependency>
 
 
