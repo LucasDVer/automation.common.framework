@@ -22,6 +22,14 @@ public abstract class BaseAPI {
     protected void loadSpecificPath() {
     }
 
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public String getSpecificPath() {
+        return specificPath;
+    }
+
     public void setBaseUrl(String url) {
         baseUrl = url;
     }
