@@ -12,7 +12,7 @@ public class Hooks {
 
     private static boolean isFirstRun = true;
 
-    @Before
+    @Before("@UI")
     public void before() throws MalformedURLException {
         if (isFirstRun) {
             Runtime.getRuntime().addShutdownHook(afterAllThread());

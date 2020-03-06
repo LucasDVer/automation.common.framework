@@ -2,8 +2,8 @@ package com.common.framework.ui.driver;
 
 import com.common.framework.logger.Loggable;
 import com.common.framework.ui.browser.Browsers;
-import com.common.framework.ui.platform.Platform;
 import com.common.framework.ui.config.UIConfigLoader;
+import com.common.framework.ui.platform.Platform;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,7 +36,6 @@ public final class Drivers implements Loggable {
      *
      * @param platform the {@link Platform}
      * @param browsers the {@link Browsers}
-     * @return the {@link Driver}
      * @throws MalformedURLException if the URL of the remote server is invalid
      */
     public static void populateDriver(Platform platform, Browsers browsers) throws MalformedURLException {

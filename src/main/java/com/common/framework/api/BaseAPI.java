@@ -11,6 +11,7 @@ public abstract class BaseAPI {
 
     public BaseAPI() {
         loadBaseUrl();
+        loadSpecificPath();
     }
 
     public Response doGet() {
@@ -19,19 +20,18 @@ public abstract class BaseAPI {
 
     protected abstract void loadBaseUrl();
 
-    protected void loadSpecificPath() {
-    }
+    protected abstract void loadSpecificPath();
 
     public String getBaseUrl() {
         return baseUrl;
     }
 
-    public String getSpecificPath() {
-        return specificPath;
-    }
-
     public void setBaseUrl(String url) {
         baseUrl = url;
+    }
+
+    public String getSpecificPath() {
+        return specificPath;
     }
 
     public void setSpecificPath(String specificPath) {

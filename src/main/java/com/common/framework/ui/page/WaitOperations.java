@@ -156,7 +156,7 @@ public abstract class WaitOperations implements Loggable {
         return getWebDriverWait().until(ExpectedConditions.urlContains(url));
     }
 
-    public void waitForElementLocatedToBeInvisible(By by){
+    public void waitForElementLocatedToBeInvisible(By by) {
         getWebDriverWait().until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 }

@@ -1,7 +1,7 @@
 package com.common.framework.ui.browser;
 
-import com.common.framework.utils.ConfigUtils;
 import com.common.framework.ui.driver.capabilities.CapabilitiesLoader;
+import com.common.framework.utils.ConfigUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;

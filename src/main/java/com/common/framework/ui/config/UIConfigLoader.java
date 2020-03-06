@@ -1,10 +1,10 @@
 package com.common.framework.ui.config;
 
+import com.common.framework.configuration.ConfigFile;
 import com.common.framework.exceptions.ConfigLoaderException;
 import com.common.framework.logger.Loggable;
 import com.common.framework.utils.ConfigUtils;
 import com.common.framework.utils.FileUtils;
-import com.common.framework.configuration.ConfigFile;
 
 import java.util.Optional;
 import java.util.logging.Level;

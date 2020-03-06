@@ -1,7 +1,7 @@
 package com.common.framework.utils;
 
-import com.common.framework.logger.Loggable;
 import com.common.framework.configuration.ConfigFile;
+import com.common.framework.logger.Loggable;
 import com.common.framework.ui.browser.Browsers;
 import com.common.framework.ui.platform.Platform;
 import org.apache.commons.lang3.StringUtils;

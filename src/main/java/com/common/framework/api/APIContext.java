@@ -7,11 +7,11 @@ public class APIContext {
 
     private Response response;
 
-    public Response getResponse(){
+    public Response getResponse() {
         return response;
     }
 
-    public void setResponse(Response response){
+    public void setResponse(Response response) {
         this.response = response;
     }
 }
