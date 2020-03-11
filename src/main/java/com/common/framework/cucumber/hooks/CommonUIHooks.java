@@ -1,19 +1,20 @@
-package com.common.framework.cucumber;
+package com.common.framework.cucumber.hooks;
 
 import com.common.framework.ui.driver.Drivers;
 import com.common.framework.ui.platform.Platform;
 import com.common.framework.ui.server.SeleniumStandaloneServer;
 import com.common.framework.utils.ConfigUtils;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 import java.net.MalformedURLException;
 
-public class Hooks {
+public class CommonUIHooks {
 
     private static boolean isFirstRun = true;
 
-    @Before("@UI")
-    public void before() throws MalformedURLException {
+    @Before
+    public void tearUp() throws MalformedURLException {
         if (isFirstRun) {
             Runtime.getRuntime().addShutdownHook(afterAllThread());
             if (Platform.WEB.equals(ConfigUtils.getPlatform())) {
@@ -31,5 +32,11 @@ public class Hooks {
                 SeleniumStandaloneServer.SERVER.stop();
             }
         });
+    }
+
+    @After
+    public void tearDown() {
+        Runtime.getRuntime().addShutdownHook(afterAllThread());
+        Drivers.dispose();
     }
 }
