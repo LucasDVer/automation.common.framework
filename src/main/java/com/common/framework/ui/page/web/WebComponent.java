@@ -1,21 +1,29 @@
 package com.common.framework.ui.page.web;
 
+import com.common.framework.ui.driver.Drivers;
 import lombok.Getter;
 import lombok.Setter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
-
-import static org.openqa.selenium.support.PageFactory.initElements;
 
 @Getter
 @Setter
 public abstract class WebComponent extends WebOperations {
 
-    private WebElement container;
+    private WebElement webElementContainer;
+    private By byContainer;
 
     protected WebComponent(WebElement container) {
-        this.container = container;
-        initElements(new DefaultElementLocatorFactory(container), this);
+        this.webElementContainer = container;
+    }
+
+    protected WebComponent(By container) {
+        this.byContainer = container;
+        this.webElementContainer = Drivers.getDriver().getWebDriver().findElement(container);
+    }
+
+    public WebElement getWebElementContainer() {
+        return webElementContainer;
     }
 
 }

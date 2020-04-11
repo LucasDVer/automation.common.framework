@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -158,5 +159,15 @@ public abstract class WaitOperations implements Loggable {
 
     public void waitForElementLocatedToBeInvisible(By by) {
         getWebDriverWait().until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+
+    public <T> T waitFor(ExpectedCondition<T> condition) {
+        try {
+            return getWebDriverWait().until(condition);
+        } catch (TimeoutException toe) {
+            error(toe.getMessage());
+            throw toe;
+        }
     }
 }
