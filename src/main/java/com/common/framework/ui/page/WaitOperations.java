@@ -73,7 +73,7 @@ public abstract class WaitOperations implements Loggable {
      * @param webElements a {@link List} of {@link WebElement}
      * @return {@code TRUE} if the elements are present
      */
-    protected boolean areVisible(List<WebElement> webElements) {
+    protected boolean areElementsVisible(List<WebElement> webElements) {
         try {
             return getWebDriverWait().until(visibilityOfAllElements(webElements)).stream().allMatch(WebElement::isDisplayed);
         } catch (TimeoutException | NoSuchElementException e) {
