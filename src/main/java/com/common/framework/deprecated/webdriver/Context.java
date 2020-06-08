@@ -1,7 +1,7 @@
-package com.common.framework.webdriver;
+package com.common.framework.deprecated.webdriver;
 
-import com.common.framework.configuration.EnvironmentProvider;
 import com.common.framework.configuration.ExecutionPropertiesProvider;
+import com.common.framework.deprecated.configuration.EnvironmentProvider;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.WebDriver;
