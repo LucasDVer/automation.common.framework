@@ -1,9 +1,9 @@
-package com.common.framework.utils;
+package com.common.framework.configuration;
 
-import com.common.framework.configuration.ConfigFile;
 import com.common.framework.logger.Loggable;
 import com.common.framework.ui.browser.Browsers;
 import com.common.framework.ui.platform.Platform;
+import com.common.framework.utils.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
@@ -12,22 +12,21 @@ import java.util.Properties;
 import static java.lang.System.getProperty;
 import static java.lang.System.getenv;
 
-public class ConfigUtils implements Loggable {
+public class PropertiesLoader implements Loggable {
 
     private static final String ENVIRONMENT = "environment";
     private static final String DEFAULT_ENVIRONMENT = "automation";
     private static final String PLATFORM = "platform";
     private static final String BROWSER = "browser";
-    private static final String CONFIG_FILE_SUFFIX = "config";
     private static Properties properties;
 
-    private ConfigUtils() {
+    private PropertiesLoader() {
     }
 
     private static Properties getInstance() {
         if (properties == null) {
             try {
-                return FileUtils.loadFromProperties(ConfigUtils.getEnvironment());
+                return FileUtils.loadFromProperties(PropertiesLoader.getEnvironment());
             } catch (IOException e) {
                 throw new RuntimeException("Property file was not found");
             }
@@ -49,10 +48,6 @@ public class ConfigUtils implements Loggable {
             property = getenv(key);
         }
         return property;
-    }
-
-    public static String getConfigFileNameByType(ConfigFile fileType) {
-        return String.format("%s-%s-%s", fileType.getValue(), getEnvironment(), CONFIG_FILE_SUFFIX);
     }
 
     public static String getEnvironment() {

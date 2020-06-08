@@ -1,6 +1,5 @@
 package com.common.framework.configuration;
 
-import com.common.framework.utils.ConfigUtils;
 import com.common.framework.utils.FileUtils;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class ExecutionPropertiesProvider {
 
     private static Properties getInstance() throws IOException {
         if (properties == null) {
-            properties = FileUtils.loadFromProperties(ConfigUtils.getEnvironment());
+            properties = FileUtils.loadFromProperties(PropertiesLoader.getEnvironment());
         }
         return properties;
     }

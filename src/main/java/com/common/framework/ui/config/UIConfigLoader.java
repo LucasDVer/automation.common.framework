@@ -1,9 +1,7 @@
 package com.common.framework.ui.config;
 
 import com.common.framework.configuration.ConfigFile;
-import com.common.framework.exceptions.ConfigLoaderException;
 import com.common.framework.logger.Loggable;
-import com.common.framework.utils.ConfigUtils;
 import com.common.framework.utils.FileUtils;
 
 import java.util.Optional;
@@ -17,14 +15,9 @@ public enum UIConfigLoader implements UIConfigurable, Loggable {
     private UIConfiguration config;
 
     UIConfigLoader() {
-        String file = ConfigUtils.getConfigFileNameByType(ConfigFile.UI);
-        Optional<UIConfiguration> configData = FileUtils.loadFromYML(file, UIConfiguration.class);
-        if (configData.isPresent()) {
-            Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.INFO, "Initializing framework configData for services...");
-            this.config = configData.get();
-        } else {
-            throw new ConfigLoaderException(file);
-        }
+        Optional<UIConfiguration> configData = FileUtils.loadFromConfigFile(ConfigFile.UI, UIConfiguration.class);
+        Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.INFO, "Initializing framework configData for services...");
+        this.config = configData.get();
     }
 
     public UIConfiguration get() {

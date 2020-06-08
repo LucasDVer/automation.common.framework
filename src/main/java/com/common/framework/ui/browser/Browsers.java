@@ -1,7 +1,7 @@
 package com.common.framework.ui.browser;
 
+import com.common.framework.configuration.PropertiesLoader;
 import com.common.framework.ui.driver.capabilities.CapabilitiesLoader;
-import com.common.framework.utils.ConfigUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -90,7 +90,7 @@ public enum Browsers implements GetCapabilities {
     };
 
     private static final String ARGUMENTS = "arguments";
-    private static final boolean IS_HEADLESS = Boolean.parseBoolean(ConfigUtils.getPropertyValue("headless"));
+    private static final boolean IS_HEADLESS = Boolean.parseBoolean(PropertiesLoader.getPropertyValue("headless"));
 
     private static final List<Browsers> BINARY_DOWNLOADED = synchronizedList(new ArrayList());
 
