@@ -1,15 +1,12 @@
 package com.common.framework.ui.config;
 
 
-import com.common.framework.configuration.BaseConfiguration;
 import com.common.framework.logger.Loggable;
 
 
-public class UIConfiguration extends BaseConfiguration implements UIConfigurable, Loggable {
+public class UIConfiguration implements UIConfigurable, Loggable {
 
     private String remoteServerURL;
-
-    private String appiumURL;
 
     private Integer implicitWait;
 
@@ -21,12 +18,18 @@ public class UIConfiguration extends BaseConfiguration implements UIConfigurable
 
     private Integer scriptTimeout;
 
-    public String getRemoteServerURL() {
-        return remoteServerURL;
+    private String baseURL;
+
+    public String getBaseURL() {
+        return baseURL;
     }
 
-    public String getAppiumURL() {
-        return appiumURL;
+    public void setBaseURL(String baseURL) {
+        this.baseURL = baseURL;
+    }
+
+    public String getRemoteServerURL() {
+        return remoteServerURL;
     }
 
     public Integer getImplicitWait() {
@@ -54,7 +57,6 @@ public class UIConfiguration extends BaseConfiguration implements UIConfigurable
         return "Config{" +
                 "baseURL='" + getBaseURL() + '\'' +
                 ", remoteServerURL='" + remoteServerURL + '\'' +
-                ", appiumURL='" + appiumURL + '\'' +
                 ", implicitWait=" + implicitWait +
                 ", explicitWait=" + explicitWait +
                 ", pollingEvery=" + pollingEvery +

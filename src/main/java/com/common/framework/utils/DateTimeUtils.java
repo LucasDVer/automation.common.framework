@@ -9,10 +9,13 @@ public class DateTimeUtils {
     private DateTimeUtils() {
     }
 
-    public static String parseDateToGivenFormat(String date, String actualFormat) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat(actualFormat);
-        SimpleDateFormat formatToReturn = new SimpleDateFormat(actualFormat);
-        Date dateToFormat = format.parse(date);
-        return formatToReturn.format(dateToFormat);
+    public static Date getDateFromString(String date, String format) throws ParseException {
+        SimpleDateFormat actualFormat = new SimpleDateFormat(format);
+        return actualFormat.parse(date);
+    }
+
+    public static boolean isActualDateBeforeASpecifiedDate(Date date) {
+        Date newDate = new Date();
+        return newDate.before(date);
     }
 }

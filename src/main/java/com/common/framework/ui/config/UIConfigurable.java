@@ -1,12 +1,10 @@
 package com.common.framework.ui.config;
 
-import com.common.framework.configuration.Configurable;
+public interface UIConfigurable {
 
-public interface UIConfigurable extends Configurable {
+    String getBaseURL();
 
     String getRemoteServerURL();
-
-    String getAppiumURL();
 
     Integer getImplicitWait();
 

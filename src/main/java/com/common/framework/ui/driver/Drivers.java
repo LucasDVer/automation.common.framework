@@ -4,7 +4,6 @@ import com.common.framework.logger.Loggable;
 import com.common.framework.ui.browser.Browsers;
 import com.common.framework.ui.config.UIConfigLoader;
 import com.common.framework.ui.platform.Platform;
-import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -42,9 +41,6 @@ public final class Drivers implements Loggable {
         if (DRIVERS_CONSTANT.get() == null) {
             WebDriver webdriver;
             switch (platform) {
-                case MOBILE:
-                    webdriver = new AppiumDriver(new URL(UIConfigLoader.CONFIG.getAppiumURL()), browsers.getCapabilities());
-                    break;
                 case WEB:
                     webdriver = setupWebDriverForWeb(browsers);
                     break;

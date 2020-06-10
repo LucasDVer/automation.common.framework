@@ -33,10 +33,6 @@ public enum UIConfigLoader implements UIConfigurable, Loggable {
         return get().getRemoteServerURL();
     }
 
-    public String getAppiumURL() {
-        return get().getAppiumURL();
-    }
-
     public Integer getImplicitWait() {
         return get().getImplicitWait();
     }
