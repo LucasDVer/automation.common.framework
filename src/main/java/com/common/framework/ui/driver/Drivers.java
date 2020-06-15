@@ -40,20 +40,18 @@ public final class Drivers implements Loggable {
     public static void populateDriver(Platform platform, Browsers browsers) throws MalformedURLException {
         if (DRIVERS_CONSTANT.get() == null) {
             WebDriver webdriver;
-            switch (platform) {
-                case WEB:
-                    webdriver = setupWebDriverForWeb(browsers);
-                    break;
-                default:
-                    webdriver = setupRemoteWebDriverForWeb(browsers);
+            if (Platform.REMOTE_WEB.equals(platform)) {
+                webdriver = setupRemoteWebDriver(browsers);
+            } else {
+                webdriver = setupWebDriver(browsers);
             }
             DRIVERS_CONSTANT.set(new Driver(platform, browsers, webdriver));
         }
     }
 
-    private static WebDriver setupWebDriverForWeb(Browsers browsers) throws MalformedURLException {
+    private static WebDriver setupWebDriver(Browsers browsers) {
         WebDriver webdriver;
-        webdriver = setupRemoteWebDriverForWeb(browsers);
+        webdriver = setupWebDriverForWebByBrowser(browsers);
         webdriver.manage().timeouts().pageLoadTimeout(UIConfigLoader.CONFIG.getPageLoadTimeout(), SECONDS)
                 .setScriptTimeout(UIConfigLoader.CONFIG.getScriptTimeout(), SECONDS)
                 .implicitlyWait(UIConfigLoader.CONFIG.getImplicitWait(), SECONDS);
@@ -61,7 +59,7 @@ public final class Drivers implements Loggable {
         return webdriver;
     }
 
-    private static WebDriver setupRemoteWebDriverForWeb(Browsers browsers) throws MalformedURLException {
+    private static WebDriver setupRemoteWebDriver(Browsers browsers) throws MalformedURLException {
         return new RemoteWebDriver(new URL(UIConfigLoader.CONFIG.getRemoteServerURL()), browsers.getCapabilities());
     }
 
