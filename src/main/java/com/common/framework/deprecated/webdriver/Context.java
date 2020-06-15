@@ -1,6 +1,6 @@
 package com.common.framework.deprecated.webdriver;
 
-import com.common.framework.configuration.ExecutionPropertiesProvider;
+import com.common.framework.configuration.PropertiesProvider;
 import com.common.framework.deprecated.configuration.EnvironmentProvider;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Context {
 
     private static Context instance;
-    private String ENVIRONMENT = Objects.requireNonNull(ExecutionPropertiesProvider.getPropertyValue("environment")).replaceAll(" ", "");
+    private String ENVIRONMENT = Objects.requireNonNull(PropertiesProvider.getPropertyValue("environment")).replaceAll(" ", "");
 
     private Context() throws IOException {
     }

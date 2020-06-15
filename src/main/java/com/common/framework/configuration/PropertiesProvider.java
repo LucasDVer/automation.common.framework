@@ -5,16 +5,16 @@ import com.common.framework.utils.FileUtils;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ExecutionPropertiesProvider {
+public class PropertiesProvider {
 
     private static Properties properties;
 
-    private ExecutionPropertiesProvider() {
+    private PropertiesProvider() {
     }
 
     private static Properties getInstance() throws IOException {
         if (properties == null) {
-            properties = FileUtils.loadFromProperties(PropertiesLoader.getEnvironment());
+            properties = FileUtils.loadFromProperties(SystemVariablesProvider.getEnvironmentValue());
         }
         return properties;
     }

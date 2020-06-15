@@ -1,7 +1,7 @@
 package com.common.framework.utils;
 
 import com.common.framework.configuration.ConfigFile;
-import com.common.framework.configuration.PropertiesLoader;
+import com.common.framework.configuration.SystemVariablesProvider;
 import com.common.framework.exceptions.ConfigLoaderException;
 import com.common.framework.exceptions.DirOrFileNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -83,7 +83,7 @@ public final class FileUtils {
     }
 
     public static String getConfigFileNameByType(ConfigFile fileType) {
-        return String.format("%s-%s-%s", fileType.getValue(), PropertiesLoader.getEnvironment(), CONFIG_FILE_SUFFIX);
+        return String.format("%s-%s-%s", fileType.getValue(), SystemVariablesProvider.getEnvironmentValue(), CONFIG_FILE_SUFFIX);
     }
 
     public static <T> Optional<T> loadFromConfigFile(ConfigFile fileType, Class<T> clazz) {
