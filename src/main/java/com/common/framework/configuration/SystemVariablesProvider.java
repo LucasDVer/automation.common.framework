@@ -26,14 +26,17 @@ public class SystemVariablesProvider implements Loggable {
     }
 
     public static String getEnvironmentValue() {
-        return getPropertyValue(ENVIRONMENT_KEY) == null ? DEFAULT_ENVIRONMENT_VALUE : getPropertyValue(ENVIRONMENT_KEY);
+        String environmentValue = getPropertyValue(ENVIRONMENT_KEY);
+        return environmentValue == null ? DEFAULT_ENVIRONMENT_VALUE : environmentValue;
     }
 
     public static Platform getPlatformValue() {
-        return getPropertyValue(PLATFORM_KEY) == null ? Platform.WEB : Platform.valueOf(getPropertyValue(PLATFORM_KEY).toUpperCase());
+        String platformValue = getPropertyValue(PLATFORM_KEY);
+        return platformValue == null ? Platform.WEB : Platform.valueOf(platformValue.toUpperCase());
     }
 
     public static Browsers getBrowserValue() {
-        return getPropertyValue(BROWSER_KEY) == null ? Browsers.CHROME : Browsers.valueOf(getPropertyValue(BROWSER_KEY).toUpperCase());
+        String browserValue = getPropertyValue(BROWSER_KEY);
+        return browserValue == null ? Browsers.CHROME : Browsers.valueOf(browserValue.toUpperCase());
     }
 }
