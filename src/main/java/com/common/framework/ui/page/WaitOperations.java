@@ -1,7 +1,7 @@
 package com.common.framework.ui.page;
 
 import com.common.framework.logger.Loggable;
-import com.common.framework.ui.driver.Drivers;
+import com.common.framework.ui.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -150,7 +150,7 @@ public abstract class WaitOperations implements Loggable {
     }
 
     private WebDriverWait getWebDriverWait() {
-        return Drivers.getDriver().getWebDriverWait();
+        return DriverManager.getDriver().getWebDriverWait();
     }
 
     public boolean waitForUrlToContain(String url) {

@@ -19,14 +19,14 @@ import java.net.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
- * Drivers manages the creation of different {@link org.openqa.selenium.WebDriver} instances, supporting parallel execution
+ * This class manages the creation of different {@link org.openqa.selenium.WebDriver} instances, supporting parallel execution
  * by using {@link ThreadLocal} to store the WebDriver instance per thread.
  */
-public final class Drivers implements Loggable {
+public final class DriverManager implements Loggable {
 
     private static final ThreadLocal<Driver> DRIVERS_CONSTANT = new ThreadLocal<>();
 
-    private Drivers() {
+    private DriverManager() {
     }
 
     /**
