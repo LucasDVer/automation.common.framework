@@ -1,6 +1,6 @@
 package com.common.framework.ui.driver;
 
-import com.common.framework.ui.browser.Browsers;
+import com.common.framework.ui.browser.Browser;
 import com.common.framework.ui.platform.Platform;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -16,7 +16,7 @@ public final class Driver {
 
     private Platform platform;
 
-    private Browsers browsers;
+    private Browser browser;
 
     private WebDriver webDriver;
 
@@ -26,14 +26,14 @@ public final class Driver {
      * Default constructor.
      *
      * @param platform  the {@link Platform}
-     * @param browsers  the {@link Browsers}
+     * @param browser   the {@link Browser}
      * @param webDriver the {@link WebDriver}
      */
-    public Driver(Platform platform, Browsers browsers, WebDriver webDriver) {
+    public Driver(Platform platform, Browser browser, WebDriver webDriver) {
         this.platform = platform;
-        this.browsers = browsers;
+        this.browser = browser;
         this.webDriver = webDriver;
-        this.webDriverWait = new WebDriverWait(webDriver, CONFIG.get().getExplicitWait());
+        this.webDriverWait = new WebDriverWait(webDriver, CONFIG.getConfig().getExplicitWait());
         webDriverWait
                 //.pollingEvery(Duration.of(CONFIG.get().getPollingEvery(), SECONDS))
                 .ignoring(StaleElementReferenceException.class)
@@ -44,8 +44,8 @@ public final class Driver {
         return platform;
     }
 
-    public Browsers getBrowsers() {
-        return browsers;
+    public Browser getBrowser() {
+        return browser;
     }
 
     public WebDriver getWebDriver() {

@@ -1,7 +1,7 @@
 package com.common.framework.configuration;
 
 import com.common.framework.logger.Loggable;
-import com.common.framework.ui.browser.Browsers;
+import com.common.framework.ui.browser.Browser;
 import com.common.framework.ui.platform.Platform;
 
 import static java.lang.System.getProperty;
@@ -35,8 +35,8 @@ public class SystemVariablesProvider implements Loggable {
         return platformValue == null ? Platform.WEB : Platform.valueOf(platformValue.toUpperCase());
     }
 
-    public static Browsers getBrowserValue() {
+    public static Browser getBrowserValue() {
         String browserValue = getPropertyValue(BROWSER_KEY);
-        return browserValue == null ? Browsers.CHROME : Browsers.valueOf(browserValue.toUpperCase());
+        return browserValue == null ? Browser.CHROME : Browser.valueOf(browserValue.toUpperCase());
     }
 }

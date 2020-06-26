@@ -1,7 +1,7 @@
 package com.common.framework.ui.driver;
 
 import com.common.framework.logger.Loggable;
-import com.common.framework.ui.browser.Browsers;
+import com.common.framework.ui.browser.Browser;
 import com.common.framework.ui.config.UIConfigLoader;
 import com.common.framework.ui.platform.Platform;
 import org.openqa.selenium.WebDriver;
@@ -34,44 +34,43 @@ public final class DriverManager implements Loggable {
      * The {@link org.openqa.selenium.WebDriver} instance will be instantiated with the desired platform capabilities.
      *
      * @param platform the {@link Platform}
-     * @param browsers the {@link Browsers}
+     * @param browser  the {@link Browser}
      * @throws MalformedURLException if the URL of the remote server is invalid
      */
-    public static void populateDriver(Platform platform, Browsers browsers) throws MalformedURLException {
+    public static void populateDriver(Platform platform, Browser browser) throws MalformedURLException {
         if (DRIVERS_CONSTANT.get() == null) {
             WebDriver webdriver;
             if (Platform.REMOTE_WEB.equals(platform)) {
-                webdriver = setupRemoteWebDriver(browsers);
+                webdriver = setupRemoteWebDriver(browser);
             } else {
-                webdriver = setupWebDriver(browsers);
+                webdriver = setupWebDriver(browser);
             }
-            DRIVERS_CONSTANT.set(new Driver(platform, browsers, webdriver));
+            DRIVERS_CONSTANT.set(new Driver(platform, browser, webdriver));
         }
     }
 
-    private static WebDriver setupWebDriver(Browsers browsers) {
-        WebDriver webdriver;
-        webdriver = setupWebDriverForWebByBrowser(browsers);
-        webdriver.manage().timeouts().pageLoadTimeout(UIConfigLoader.CONFIG.getPageLoadTimeout(), SECONDS)
-                .setScriptTimeout(UIConfigLoader.CONFIG.getScriptTimeout(), SECONDS)
-                .implicitlyWait(UIConfigLoader.CONFIG.getImplicitWait(), SECONDS);
+    private static WebDriver setupWebDriver(Browser browser) {
+        WebDriver webdriver = setupWebDriverByBrowser(browser);
+        webdriver.manage().timeouts().pageLoadTimeout(UIConfigLoader.CONFIG.getConfig().getPageLoadTimeout(), SECONDS)
+                .setScriptTimeout(UIConfigLoader.CONFIG.getConfig().getScriptTimeout(), SECONDS)
+                .implicitlyWait(UIConfigLoader.CONFIG.getConfig().getImplicitWait(), SECONDS);
         webdriver.manage().window().maximize();
         return webdriver;
     }
 
-    private static WebDriver setupRemoteWebDriver(Browsers browsers) throws MalformedURLException {
-        return new RemoteWebDriver(new URL(UIConfigLoader.CONFIG.getRemoteServerURL()), browsers.getCapabilities());
+    private static WebDriver setupRemoteWebDriver(Browser browser) throws MalformedURLException {
+        return new RemoteWebDriver(new URL(UIConfigLoader.CONFIG.getConfig().getRemoteServerURL()), browser.getCapabilities());
     }
 
-    private static WebDriver setupWebDriverForWebByBrowser(Browsers browsers) {
+    private static WebDriver setupWebDriverByBrowser(Browser browser) {
 
-        switch (browsers) {
+        switch (browser) {
             case FIREFOX:
-                return new FirefoxDriver(new FirefoxOptions(browsers.getCapabilities()));
+                return new FirefoxDriver(new FirefoxOptions(browser.getCapabilities()));
             case IE:
-                return new InternetExplorerDriver(new InternetExplorerOptions(browsers.getCapabilities()));
+                return new InternetExplorerDriver(new InternetExplorerOptions(browser.getCapabilities()));
             default:
-                return new ChromeDriver((ChromeOptions) browsers.getCapabilities());
+                return new ChromeDriver((ChromeOptions) browser.getCapabilities());
         }
     }
 

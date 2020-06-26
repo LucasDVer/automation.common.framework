@@ -4,7 +4,7 @@ package com.common.framework.ui.config;
 import com.common.framework.logger.Loggable;
 
 
-public class UIConfiguration implements UIConfigurable, Loggable {
+public class UIConfiguration implements Loggable {
 
     private String remoteServerURL;
 

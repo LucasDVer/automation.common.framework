@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public enum UIConfigLoader implements UIConfigurable, Loggable {
+public enum UIConfigLoader implements Loggable {
 
     CONFIG;
 
@@ -25,38 +25,8 @@ public enum UIConfigLoader implements UIConfigurable, Loggable {
         }
     }
 
-    public UIConfiguration get() {
+    public UIConfiguration getConfig() {
         return config;
     }
-
-    @Override
-    public String getBaseURL() {
-        return config.getBaseURL();
-    }
-
-    public String getRemoteServerURL() {
-        return get().getRemoteServerURL();
-    }
-
-    public Integer getImplicitWait() {
-        return get().getImplicitWait();
-    }
-
-    public Integer getExplicitWait() {
-        return get().getExplicitWait();
-    }
-
-    public Integer getPollingEvery() {
-        return get().getPollingEvery();
-    }
-
-    public Integer getPageLoadTimeout() {
-        return get().getPageLoadTimeout();
-    }
-
-    public Integer getScriptTimeout() {
-        return get().getScriptTimeout();
-    }
-
 
 }
