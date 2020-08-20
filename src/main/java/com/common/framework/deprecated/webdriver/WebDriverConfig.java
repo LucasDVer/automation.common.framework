@@ -1,4 +1,4 @@
-package com.common.framework.webdriver;
+package com.common.framework.deprecated.webdriver;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;

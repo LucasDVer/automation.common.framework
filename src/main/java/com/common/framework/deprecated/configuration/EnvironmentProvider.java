@@ -1,4 +1,4 @@
-package com.common.framework.configuration;
+package com.common.framework.deprecated.configuration;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.*;

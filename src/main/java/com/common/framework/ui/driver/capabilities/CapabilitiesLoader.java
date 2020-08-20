@@ -1,11 +1,11 @@
 package com.common.framework.ui.driver.capabilities;
 
 
-import com.common.framework.exceptions.CapabilitiesLoaderException;
 import com.common.framework.logger.Loggable;
 import com.common.framework.utils.FileUtils;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -28,7 +28,7 @@ public enum CapabilitiesLoader implements Loggable {
             info(String.format("Reading capabilities for '%s' ...", file));
             return capabilities.get().getCapabilities();
         } else {
-            throw new CapabilitiesLoaderException(file);
+            throw new NoSuchElementException(file);
         }
     }
 

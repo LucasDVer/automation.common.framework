@@ -1,7 +1,7 @@
 package com.common.framework.ui.js;
 
 
-import com.common.framework.ui.driver.Drivers;
+import com.common.framework.ui.driver.DriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -28,7 +28,7 @@ public final class Javascript {
      * @return the {@link JavascriptExecutor}
      */
     private static JavascriptExecutor getJavascriptExecutor() {
-        return (JavascriptExecutor) Drivers.getDriver().getWebDriver();
+        return (JavascriptExecutor) DriverManager.getDriver().getWebDriver();
     }
 
     public void scrollIntoView(WebElement element) {

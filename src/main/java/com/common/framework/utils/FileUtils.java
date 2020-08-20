@@ -1,6 +1,9 @@
 package com.common.framework.utils;
 
+import com.common.framework.configuration.ConfigFile;
+import com.common.framework.configuration.SystemVariablesProvider;
 import com.common.framework.exceptions.DirOrFileNotFoundException;
+import com.common.framework.exceptions.FailedOrInterruptedIOOperations;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.jayway.jsonpath.Configuration;
@@ -20,10 +23,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Thread.currentThread;
-import static java.util.Optional.empty;
 
 
 public final class FileUtils {
+
+    private static final String CONFIG_FILE_SUFFIX = "config";
 
     private static final Configuration conf = Configuration.builder()
             .jsonProvider(new JacksonJsonProvider())
@@ -51,11 +55,11 @@ public final class FileUtils {
             T obj = objectMapper.readValue(input, clazz);
             return Optional.of(obj);
         } catch (IOException e) {
-            return empty();
+            throw new FailedOrInterruptedIOOperations(e.getMessage());
         }
     }
 
-    public static Properties loadFromProperties(String file) throws IOException {
+    public static Properties loadFromProperties(String file) {
         Properties properties = new Properties();
         try (InputStream input = currentThread().getContextClassLoader()
                 .getResourceAsStream(file + ".properties")) {
@@ -63,7 +67,10 @@ public final class FileUtils {
             return properties;
         } catch (NullPointerException | FileNotFoundException e) {
             throw new DirOrFileNotFoundException(e.getMessage());
+        } catch (IOException e) {
+            throw new FailedOrInterruptedIOOperations(e.getMessage());
         }
+
     }
 
     public static void setDownloadDirectoryForFile(File tempDir) {
@@ -75,5 +82,14 @@ public final class FileUtils {
             }
         }
         System.setProperty("wdm.targetPath", tempDir.getAbsolutePath());
+    }
+
+    public static String getConfigFileNameByType(ConfigFile fileType) {
+        return String.format("%s-%s-%s", fileType.getValue(), SystemVariablesProvider.getEnvironmentValue(), CONFIG_FILE_SUFFIX);
+    }
+
+    public static <T> Optional<T> loadFromConfigFile(ConfigFile fileType, Class<T> clazz) {
+        String file = FileUtils.getConfigFileNameByType(fileType);
+        return FileUtils.loadFromYML(file, clazz);
     }
 }

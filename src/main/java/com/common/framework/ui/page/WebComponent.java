@@ -1,6 +1,6 @@
-package com.common.framework.ui.page.web;
+package com.common.framework.ui.page;
 
-import com.common.framework.ui.driver.Drivers;
+import com.common.framework.ui.driver.DriverManager;
 import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.By;
@@ -19,7 +19,7 @@ public abstract class WebComponent extends WebOperations {
 
     protected WebComponent(By container) {
         this.byContainer = container;
-        this.webElementContainer = Drivers.getDriver().getWebDriver().findElement(container);
+        this.webElementContainer = DriverManager.getDriver().getWebDriver().findElement(container);
     }
 
     public WebElement getWebElementContainer() {
