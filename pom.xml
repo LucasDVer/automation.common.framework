@@ -10,7 +10,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <!--<aspectj.version>1.9.4</aspectj.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.13.3</jackson.version>
         <cucumber.version>7.4.1</cucumber.version>
