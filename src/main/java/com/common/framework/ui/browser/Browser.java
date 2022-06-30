@@ -2,6 +2,7 @@ package com.common.framework.ui.browser;
 
 import com.common.framework.configuration.SystemVariablesProvider;
 import com.common.framework.ui.driver.capabilities.CapabilitiesLoader;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
@@ -29,7 +30,7 @@ public enum Browser implements GetCapabilities {
                 BINARY_DOWNLOADED.add(CHROME);
             }
 
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+            DesiredCapabilities capabilities = new DesiredCapabilities("chrome", "103.0.5060.66", Platform.WINDOWS);
 
             String[] arguments = new String[0];
             if (IS_HEADLESS) {
