@@ -9,7 +9,7 @@ public abstract class BaseAPI {
     private String specificPath = "";
     private String query = "";
 
-    public BaseAPI() {
+    protected BaseAPI() {
         loadBaseUrl();
         loadSpecificPath();
     }

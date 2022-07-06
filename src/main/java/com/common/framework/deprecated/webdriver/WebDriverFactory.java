@@ -23,14 +23,14 @@ public class WebDriverFactory {
                 driver = new FirefoxDriver();
             }
             case "IE" -> {
-                InternetExplorerOptions IEOptions = new InternetExplorerOptions();
-                IEOptions.setCapability(CapabilityType.BROWSER_NAME, "internet explorer");
-                IEOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                IEOptions.setCapability("requireWindowFocus", true);
-                IEOptions.setCapability("ignoreZoomSetting", true);
+                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+                ieOptions.setCapability(CapabilityType.BROWSER_NAME, "internet explorer");
+                ieOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                ieOptions.setCapability("requireWindowFocus", true);
+                ieOptions.setCapability("ignoreZoomSetting", true);
                 File file = new File("IEDriverServer.exe");
                 System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-                driver = new InternetExplorerDriver(IEOptions);
+                driver = new InternetExplorerDriver(ieOptions);
             }
             default -> {
                 System.setProperty("webdriver.chrome.driver", config.chromeDriver());
