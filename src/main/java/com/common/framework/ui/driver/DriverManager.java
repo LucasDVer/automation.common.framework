@@ -15,8 +15,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
+import java.time.Duration;
 
 /**
  * This class manages the creation of different {@link org.openqa.selenium.WebDriver} instances, supporting parallel execution
@@ -51,9 +50,8 @@ public final class DriverManager implements Loggable {
 
     private static WebDriver setupWebDriver(Browser browser) {
         WebDriver webdriver = setupWebDriverByBrowser(browser);
-        webdriver.manage().timeouts().pageLoadTimeout(UIConfigLoader.CONFIG.getConfig().getPageLoadTimeout(), SECONDS)
-                .setScriptTimeout(UIConfigLoader.CONFIG.getConfig().getScriptTimeout(), SECONDS)
-                .implicitlyWait(UIConfigLoader.CONFIG.getConfig().getImplicitWait(), SECONDS);
+        webdriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(UIConfigLoader.CONFIG.getConfig().getPageLoadTimeout()))
+                .implicitlyWait(Duration.ofSeconds(UIConfigLoader.CONFIG.getConfig().getImplicitWait()));
         webdriver.manage().window().maximize();
         return webdriver;
     }
@@ -64,14 +62,11 @@ public final class DriverManager implements Loggable {
 
     private static WebDriver setupWebDriverByBrowser(Browser browser) {
 
-        switch (browser) {
-            case FIREFOX:
-                return new FirefoxDriver(new FirefoxOptions(browser.getCapabilities()));
-            case IE:
-                return new InternetExplorerDriver(new InternetExplorerOptions(browser.getCapabilities()));
-            default:
-                return new ChromeDriver((ChromeOptions) browser.getCapabilities());
-        }
+        return switch (browser) {
+            case FIREFOX -> new FirefoxDriver(new FirefoxOptions(browser.getCapabilities()));
+            case IE -> new InternetExplorerDriver(new InternetExplorerOptions(browser.getCapabilities()));
+            default -> new ChromeDriver((ChromeOptions) browser.getCapabilities());
+        };
     }
 
 
