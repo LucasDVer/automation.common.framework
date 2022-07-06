@@ -75,6 +75,10 @@ public enum Browser implements GetCapabilities {
     private static final String ARGUMENTS = "arguments";
     private static final boolean IS_HEADLESS = Boolean.parseBoolean(SystemVariablesProvider.getPropertyValue("headless"));
 
-    private static final List<Browser> BINARY_DOWNLOADED = synchronizedList(new ArrayList());
+    private static final List<Browser> BINARY_DOWNLOADED;
+
+    static {
+        BINARY_DOWNLOADED = synchronizedList(new ArrayList<>());
+    }
 
 }

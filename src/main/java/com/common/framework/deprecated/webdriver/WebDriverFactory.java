@@ -9,8 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import java.io.File;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
+import java.time.Duration;
 
 public class WebDriverFactory {
 
@@ -19,11 +18,11 @@ public class WebDriverFactory {
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class);
         String browser = config.browser().toUpperCase();
         switch (browser) {
-            case "FIREFOX":
+            case "FIREFOX" -> {
                 System.setProperty("webdriver.gecko.driver", config.geckoDriver());
                 driver = new FirefoxDriver();
-                break;
-            case "IE":
+            }
+            case "IE" -> {
                 InternetExplorerOptions IEOptions = new InternetExplorerOptions();
                 IEOptions.setCapability(CapabilityType.BROWSER_NAME, "internet explorer");
                 IEOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
@@ -32,18 +31,18 @@ public class WebDriverFactory {
                 File file = new File("IEDriverServer.exe");
                 System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
                 driver = new InternetExplorerDriver(IEOptions);
-                break;
-            default:
+            }
+            default -> {
                 System.setProperty("webdriver.chrome.driver", config.chromeDriver());
                 driver = new ChromeDriver();
-                break;
+            }
         }
         return driver;
     }
 
     public WebDriver get() {
         WebDriver driver = generateDriver();
-        driver.manage().timeouts().implicitlyWait(1, SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         driver.manage().window().maximize();
         return driver;
     }
