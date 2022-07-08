@@ -49,9 +49,7 @@ public enum Browser implements GetCapabilities {
                 firefoxdriver().setup();
                 BINARY_DOWNLOADED.add(FIREFOX);
             }
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setCapability("marionette", false);
-            return firefoxOptions;
+            return new FirefoxOptions();
         }
     };
 
