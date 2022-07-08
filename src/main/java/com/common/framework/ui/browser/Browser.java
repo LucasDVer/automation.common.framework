@@ -4,7 +4,6 @@ import com.common.framework.configuration.SystemVariablesProvider;
 import com.common.framework.ui.driver.capabilities.CapabilitiesLoader;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +27,14 @@ public enum Browser implements GetCapabilities {
                 BINARY_DOWNLOADED.add(CHROME);
             }
 
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
             String[] arguments = new String[0];
             if (IS_HEADLESS) {
                 Map<String, String> extraCapabilities = CapabilitiesLoader.CAPABILITIES.readCapabilities("headless");
                 arguments = String.valueOf(extraCapabilities.get(ARGUMENTS)).split(",");
-                extraCapabilities.remove(ARGUMENTS);
-                extraCapabilities.forEach(capabilities::setCapability);
             }
 
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.merge(capabilities);
             for (String argument : arguments) {
                 chromeOptions.addArguments("--" + argument);
             }
