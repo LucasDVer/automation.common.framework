@@ -9,8 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -61,12 +59,11 @@ public final class DriverManager implements Loggable {
     }
 
     private static WebDriver setupWebDriverByBrowser(Browser browser) {
-
-        return switch (browser) {
-            case FIREFOX -> new FirefoxDriver(new FirefoxOptions(browser.getCapabilities()));
-            case IE -> new InternetExplorerDriver(new InternetExplorerOptions(browser.getCapabilities()));
-            default -> new ChromeDriver((ChromeOptions) browser.getCapabilities());
-        };
+        if (Browser.FIREFOX.equals(browser)) {
+            return new FirefoxDriver((FirefoxOptions) browser.getCapabilities());
+        }else {
+            return new ChromeDriver((ChromeOptions) browser.getCapabilities());
+        }
     }
 
 

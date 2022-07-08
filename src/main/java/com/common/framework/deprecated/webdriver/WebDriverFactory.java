@@ -42,7 +42,7 @@ public class WebDriverFactory {
 
     public WebDriver get() {
         WebDriver driver = generateDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         return driver;
     }
