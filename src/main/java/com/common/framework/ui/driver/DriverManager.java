@@ -60,7 +60,7 @@ public final class DriverManager implements Loggable {
     }
 
     private static WebDriver setupWebDriverByBrowser(Browser browser) {
-        if (Browser.FIREFOX == browser) {
+        if (Browser.FIREFOX.equals(browser)) {
             return new FirefoxDriver(new FirefoxOptions(browser.getCapabilities()));
         }else {
             return new ChromeDriver((ChromeOptions) browser.getCapabilities());
