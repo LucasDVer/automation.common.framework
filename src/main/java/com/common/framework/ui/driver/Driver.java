@@ -34,7 +34,6 @@ public final class Driver {
         this.webDriver = webDriver;
         this.webDriverWait = new WebDriverWait(webDriver, CONFIG.getConfig().getExplicitWait());
         webDriverWait
-                //.pollingEvery(Duration.of(CONFIG.get().getPollingEvery(), SECONDS))
                 .ignoring(StaleElementReferenceException.class)
                 .ignoring(NotFoundException.class);
     }
