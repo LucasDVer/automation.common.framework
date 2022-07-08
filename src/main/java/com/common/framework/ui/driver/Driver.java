@@ -6,9 +6,6 @@ import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-
 import static com.common.framework.ui.config.UIConfigLoader.CONFIG;
 
 /**
@@ -16,13 +13,13 @@ import static com.common.framework.ui.config.UIConfigLoader.CONFIG;
  */
 public final class Driver {
 
-    private Platform platform;
+    private final Platform platform;
 
-    private Browser browser;
+    private final Browser browser;
 
-    private WebDriver webDriver;
+    private final WebDriver webDriver;
 
-    private WebDriverWait webDriverWait;
+    private final WebDriverWait webDriverWait;
 
     /**
      * Default constructor.
@@ -35,7 +32,7 @@ public final class Driver {
         this.platform = platform;
         this.browser = browser;
         this.webDriver = webDriver;
-        this.webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(CONFIG.getConfig().getExplicitWait()));
+        this.webDriverWait = new WebDriverWait(webDriver, CONFIG.getConfig().getExplicitWait());
         webDriverWait
                 //.pollingEvery(Duration.of(CONFIG.get().getPollingEvery(), SECONDS))
                 .ignoring(StaleElementReferenceException.class)

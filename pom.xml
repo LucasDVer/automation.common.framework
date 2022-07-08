@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.3.0</version>
+            <version>3.141.59</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server -->
@@ -36,8 +36,6 @@
             <artifactId>selenium-server</artifactId>
             <version>3.141.59</version>
         </dependency>
-
-
 
         <!-- WEBDRIVER MANAGER PARA CROSSBROWSING -->
         <dependency>

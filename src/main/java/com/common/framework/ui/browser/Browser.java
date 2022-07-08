@@ -2,10 +2,8 @@ package com.common.framework.ui.browser;
 
 import com.common.framework.configuration.SystemVariablesProvider;
 import com.common.framework.ui.driver.capabilities.CapabilitiesLoader;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public enum Browser implements GetCapabilities {
                 BINARY_DOWNLOADED.add(CHROME);
             }
 
-            DesiredCapabilities capabilities = new DesiredCapabilities("chrome", "103.0.5060.66", Platform.WINDOWS);
+            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
             String[] arguments = new String[0];
             if (IS_HEADLESS) {
@@ -56,19 +54,9 @@ public enum Browser implements GetCapabilities {
                 firefoxdriver().setup();
                 BINARY_DOWNLOADED.add(FIREFOX);
             }
-
-            return new FirefoxOptions();
-        }
-    },
-    IE {
-        @Override
-        public InternetExplorerOptions getCapabilities() {
-            if (!BINARY_DOWNLOADED.contains(IE)) {
-                iedriver().setup();
-                BINARY_DOWNLOADED.add(IE);
-            }
-
-            return new InternetExplorerOptions();
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability("marionette", false);
+            return firefoxOptions;
         }
     };
 

@@ -9,7 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import java.io.File;
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class WebDriverFactory {
 
@@ -42,7 +42,7 @@ public class WebDriverFactory {
 
     public WebDriver get() {
         WebDriver driver = generateDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
     }
