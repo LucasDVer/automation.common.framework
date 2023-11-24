@@ -1,6 +1,7 @@
 package com.common.framework.ui.browser;
 
 import com.common.framework.configuration.SystemVariablesProvider;
+import com.common.framework.ui.driver.capabilities.CapabilitiesLoader;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
@@ -8,6 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
 import static java.util.Collections.synchronizedList;
@@ -27,16 +29,16 @@ public enum Browser implements GetCapabilities {
                 BINARY_DOWNLOADED.add(CHROME);
             }
 
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+            DesiredCapabilities capabilities = null; //DesiredCapabilities.chrome();
 
             String[] arguments = new String[0];
             if (IS_HEADLESS) {
-                /*Map<String, String> extraCapabilities = CapabilitiesLoader.CAPABILITIES.readCapabilities("headless");
+                Map<String, String> extraCapabilities = CapabilitiesLoader.CAPABILITIES.readCapabilities("headless");
                 arguments = String.valueOf(extraCapabilities.get(ARGUMENTS)).split(",");
                 extraCapabilities.remove(ARGUMENTS);
                 extraCapabilities.forEach(capabilities::setCapability);
-                 */
-                arguments = new String[]{"headless"};
+
+                //arguments = new String[]{"headless","disable-extensions","disable-gpu","no-sandbox","window-size=1920,1080","start-maximized"};
             }
 
             ChromeOptions chromeOptions = new ChromeOptions();

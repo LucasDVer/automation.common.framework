@@ -33,7 +33,7 @@ public final class Driver {
         this.platform = platform;
         this.browser = browser;
         this.webDriver = webDriver;
-        this.webDriverWait = new WebDriverWait(webDriver, CONFIG.getConfig().getExplicitWait());
+        //this.webDriverWait = new WebDriverWait(webDriver, CONFIG.getConfig().getExplicitWait());
         webDriverWait
                 //.pollingEvery(Duration.of(CONFIG.get().getPollingEvery(), SECONDS))
                 .ignoring(StaleElementReferenceException.class)
