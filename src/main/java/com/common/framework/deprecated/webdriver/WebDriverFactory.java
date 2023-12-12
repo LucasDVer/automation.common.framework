@@ -9,8 +9,7 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 import java.io.File;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
+import java.time.Duration;
 
 public class WebDriverFactory {
 
@@ -19,31 +18,31 @@ public class WebDriverFactory {
         WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class);
         String browser = config.browser().toUpperCase();
         switch (browser) {
-            case "FIREFOX":
+            case "FIREFOX" -> {
                 System.setProperty("webdriver.gecko.driver", config.geckoDriver());
                 driver = new FirefoxDriver();
-                break;
-            case "IE":
-                InternetExplorerOptions IEOptions = new InternetExplorerOptions();
-                IEOptions.setCapability(CapabilityType.BROWSER_NAME, "internet explorer");
-                IEOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                IEOptions.setCapability("requireWindowFocus", true);
-                IEOptions.setCapability("ignoreZoomSetting", true);
+            }
+            case "IE" -> {
+                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+                ieOptions.setCapability(CapabilityType.BROWSER_NAME, "internet explorer");
+                ieOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                ieOptions.setCapability("requireWindowFocus", true);
+                ieOptions.setCapability("ignoreZoomSetting", true);
                 File file = new File("IEDriverServer.exe");
                 System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-                driver = new InternetExplorerDriver(IEOptions);
-                break;
-            default:
+                driver = new InternetExplorerDriver(ieOptions);
+            }
+            default -> {
                 System.setProperty("webdriver.chrome.driver", config.chromeDriver());
                 driver = new ChromeDriver();
-                break;
+            }
         }
         return driver;
     }
 
     public WebDriver get() {
         WebDriver driver = generateDriver();
-        driver.manage().timeouts().implicitlyWait(1, SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         return driver;
     }
