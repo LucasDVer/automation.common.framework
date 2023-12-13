@@ -26,12 +26,12 @@ public enum Browser implements GetCapabilities {
                 chromedriver().setup();
                 BINARY_DOWNLOADED.add(CHROME);
             }
-
-
+          
             String[] arguments = new String[0];
             if (IS_HEADLESS) {
                 Map<String, String> extraCapabilities = CapabilitiesLoader.CAPABILITIES.readCapabilities("headless");
                 arguments = String.valueOf(extraCapabilities.get(ARGUMENTS)).split(",");
+
             }
 
             ChromeOptions chromeOptions = new ChromeOptions();
