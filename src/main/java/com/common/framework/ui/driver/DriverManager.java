@@ -48,14 +48,14 @@ public final class DriverManager implements Loggable {
 
     private static WebDriver setupWebDriver(Browser browser) {
         WebDriver webdriver = setupWebDriverByBrowser(browser);
-        webdriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(UIConfigLoader.CONFIG.getConfig().getPageLoadTimeout()))
-                .implicitlyWait(Duration.ofSeconds(UIConfigLoader.CONFIG.getConfig().getImplicitWait()));
+        webdriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(UIConfigLoader.getConfig().getPageLoadTimeout()))
+                .implicitlyWait(Duration.ofSeconds(UIConfigLoader.getConfig().getImplicitWait()));
         webdriver.manage().window().maximize();
         return webdriver;
     }
 
     private static WebDriver setupRemoteWebDriver(Browser browser) throws MalformedURLException {
-        return new RemoteWebDriver(new URL(UIConfigLoader.CONFIG.getConfig().getRemoteServerURL()), browser.getCapabilities());
+        return new RemoteWebDriver(new URL(UIConfigLoader.getConfig().getRemoteServerURL()), browser.getCapabilities());
     }
 
     private static WebDriver setupWebDriverByBrowser(Browser browser) {

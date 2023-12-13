@@ -1,14 +1,13 @@
 package com.common.framework.ui.driver;
 
 import com.common.framework.ui.browser.Browser;
+import com.common.framework.ui.config.UIConfigLoader;
 import com.common.framework.ui.platform.Platform;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-
-import static com.common.framework.ui.config.UIConfigLoader.CONFIG;
 
 /**
  * Driver is the container of the {@link WebDriver} instance and the {@link Platform} information.
@@ -34,7 +33,7 @@ public final class Driver {
         this.platform = platform;
         this.browser = browser;
         this.webDriver = webDriver;
-        this.webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(CONFIG.getConfig().getExplicitWait()));
+        this.webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(UIConfigLoader.getConfig().getExplicitWait()));
         webDriverWait
                 .ignoring(StaleElementReferenceException.class)
                 .ignoring(NotFoundException.class);
