@@ -5,13 +5,9 @@ import java.util.Map;
 
 public class ScenarioContext {
 
-    private Map<String, Object> context;
+    private static Map<String, Object> context = new HashMap<>();
 
-    public ScenarioContext(){
-        this.context = new HashMap<>();
-    }
-
-    public Object getContext(){
+    public static Map<String, Object> getContext(){
         return context;
     }
 
@@ -19,7 +15,7 @@ public class ScenarioContext {
         return context.get(key);
     }
 
-    public void addToContext(String key, Object value){
+    public static void addToContext(String key, Object value){
         context.put(key, value);
     }
 }

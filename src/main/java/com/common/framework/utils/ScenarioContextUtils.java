@@ -1,11 +1,11 @@
 package com.common.framework.utils;
 
-import com.common.framework.bdd.ScenarioContext;
+import java.util.Map;
 
 public class ScenarioContextUtils {
 
-    public static <T> T getCastedObjectFromContext(ScenarioContext actualContext, String key, Class<T> classToCast){
-        return (classToCast.cast(actualContext.getFromContext(key)));
+    public static <T> T getCastedObjectFromContext(Map<String, Object> actualContext, String key, Class<T> classToCast){
+        return (classToCast.cast(actualContext.get(key)));
     }
 
     private ScenarioContextUtils(){}

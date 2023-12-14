@@ -9,23 +9,27 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public enum UIConfigLoader implements Loggable {
+public class UIConfigLoader implements Loggable {
 
-    CONFIG;
+    private static UIConfiguration config;
 
-    private UIConfiguration config;
+    private UIConfigLoader() {
+    }
 
-    UIConfigLoader() {
+    private static void loadConfigData() {
         Optional<UIConfiguration> configData = FileUtils.loadFromConfigFile(ConfigFile.UI, UIConfiguration.class);
         Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.INFO, "Initializing framework configData for services...");
         if (configData.isPresent()) {
-            this.config = configData.get();
+            config = configData.get();
         } else {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("An error occurred trying to get the request config");
         }
     }
 
-    public UIConfiguration getConfig() {
+    public static UIConfiguration getConfig() {
+        if(config == null){
+            loadConfigData();
+        }
         return config;
     }
 
