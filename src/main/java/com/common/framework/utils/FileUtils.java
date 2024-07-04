@@ -4,18 +4,19 @@ import com.common.framework.configuration.ConfigFile;
 import com.common.framework.configuration.SystemVariablesProvider;
 import com.common.framework.exceptions.DirOrFileNotFoundException;
 import com.common.framework.exceptions.FailedOrInterruptedIOOperations;
+import com.common.framework.logger.Loggable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.Option;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.Optional;
 import java.util.Properties;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
 import static java.lang.Thread.currentThread;
 
 
-public final class FileUtils {
+public final class FileUtils implements Loggable {
 
     private static final String CONFIG_FILE_SUFFIX = "config";
 
@@ -92,4 +93,24 @@ public final class FileUtils {
         String file = FileUtils.getConfigFileNameByType(fileType);
         return FileUtils.loadFromYML(file, clazz);
     }
+
+    /**
+     * This method allows the user to obtain the Json from a Json file.
+     * 
+     * @param path The path of the File you want to extract from the String.
+     * @param subPath The part of the jsonFile we need.
+     * @return The jsonData we need.
+     */
+    public static JsonObject getStringFromJsonFile(String path, String subPath){
+        JsonObject jsonObject = null;
+        try(FileReader reader = new FileReader(path)){
+            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
+            jsonObject = jsonArray.get(0).getAsJsonObject();
+            return jsonObject.get(subPath).getAsJsonObject();
+        }catch (IOException e){
+            e.getMessage();
+        }
+        return jsonObject;
+    }
+
 }
