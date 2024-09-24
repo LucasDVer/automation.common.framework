@@ -113,4 +113,10 @@ public final class FileUtils implements Loggable {
         return jsonObject;
     }
 
+    public static String getStringFromJsonFileWithoutStatusCode(String path, String subPath){
+        JsonObject jsonData = getStringFromJsonFile(path, subPath);
+        jsonData.remove("statusCode");
+        return jsonData.toString();
+    }
+
 }
