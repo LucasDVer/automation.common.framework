@@ -9,8 +9,8 @@ import static java.lang.System.getenv;
 
 public class SystemVariablesProvider implements Loggable {
 
-    private static final String ENVIRONMENT_KEY = "environment";
-    private static final String DEFAULT_ENVIRONMENT_VALUE = "automation";
+    private static final String ENVIRONMENT_KEY = "env";
+    private static final String DEFAULT_ENVIRONMENT_VALUE = "qa";
     private static final String PLATFORM_KEY = "platform";
     private static final String BROWSER_KEY = "browser";
 
