@@ -1,5 +1,6 @@
 package com.common.framework.api;
 
+import com.common.framework.configuration.PropertiesProvider;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -15,7 +16,9 @@ public abstract class BaseAPI {
 
     protected  Response doGet(String path) { return RestAssured.get(baseUrl + specificPath + path); }
 
-    protected abstract void loadBaseUrl();
+    protected void loadBaseUrl(){
+        setBaseUrl(PropertiesProvider.getPropertyValue("hostUrl"));
+    }
 
     protected abstract void loadSpecificPath();
 
