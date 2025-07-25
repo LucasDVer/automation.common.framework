@@ -44,12 +44,6 @@ public final class FileUtils implements Loggable {
         return Optional.of(obj);
     }
 
-    public static <T> Optional<T> loadFromJson(String file, Class<T> clazz) {
-        InputStream input = currentThread().getContextClassLoader().getResourceAsStream(file + ".json");
-        T obj = JsonPath.using(conf).parse(input).read("$..*", clazz);
-        return Optional.of(obj);
-    }
-
     public static <T> Optional<T> loadFromYML(String file, Class<T> clazz) {
         ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
         try (InputStream input = currentThread().getContextClassLoader().getResourceAsStream(file + ".yml")) {
