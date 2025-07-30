@@ -1,57 +1,53 @@
 package com.common.framework.ui.driver;
 
-import com.common.framework.ui.browser.Browser;
-import com.common.framework.ui.config.UIConfigLoader;
 import com.common.framework.ui.platform.Platform;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import static java.lang.System.getProperty;
+import static java.lang.System.getenv;
 
 /**
  * Driver is the container of the {@link WebDriver} instance and the {@link Platform} information.
  */
 public final class Driver {
 
-    private final Platform platform;
+    private static final String BROWSER_KEY = "browser";
+    private static final String CHROME_BROWSER = "chrome";
+    private static final String FIREFOX_BROWSER = "firefox";
+    private static final String EDGE_BROWSER = "edge";
 
-    private final Browser browser;
+    private Driver(){
 
-    private final WebDriver webDriver;
-
-    private final WebDriverWait webDriverWait;
-
-    /**
-     * Default constructor.
-     *
-     * @param platform  the {@link Platform}
-     * @param browser   the {@link Browser}
-     * @param webDriver the {@link WebDriver}
-     */
-    public Driver(Platform platform, Browser browser, WebDriver webDriver) {
-        this.platform = platform;
-        this.browser = browser;
-        this.webDriver = webDriver;
-        this.webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(UIConfigLoader.getConfig().getExplicitWait()));
-        webDriverWait
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(NotFoundException.class);
     }
 
-    public Platform getPlatform() {
-        return platform;
+    private static String getPropertyValue(String key) {
+        String property = getProperty(key);
+        if (property == null ) {
+            property = getenv(key);
+        }
+        return property;
     }
 
-    public Browser getBrowser() {
-        return browser;
+    private static String getBrowserValue() {
+        String browser = getPropertyValue(BROWSER_KEY);
+        return browser == null ? CHROME_BROWSER : browser;
     }
 
-    public WebDriver getWebDriver() {
-        return webDriver;
+    public static WebDriver getDriverByBrowser() {
+        String browser = getBrowserValue();
+        switch (browser) {
+            case (FIREFOX_BROWSER) :
+                return new FirefoxDriver();
+            case (EDGE_BROWSER) :
+                return new EdgeDriver();
+            default:
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--headless=new");
+                return new ChromeDriver();
+        }
     }
 
-    public WebDriverWait getWebDriverWait() {
-        return webDriverWait;
-    }
 }

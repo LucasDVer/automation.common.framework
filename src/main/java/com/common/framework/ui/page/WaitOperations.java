@@ -2,18 +2,16 @@ package com.common.framework.ui.page;
 
 import com.common.framework.logger.Loggable;
 import com.common.framework.ui.driver.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
+@Slf4j
 public abstract class WaitOperations implements Loggable {
 
     /**
@@ -149,8 +147,11 @@ public abstract class WaitOperations implements Loggable {
         }
     }
 
-    private WebDriverWait getWebDriverWait() {
-        return DriverManager.getDriver().getWebDriverWait();
+    private Wait<WebDriver> getWebDriverWait() {
+        return new FluentWait<>(DriverManager.getDriver())
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
     }
 
     public boolean waitForUrlToContain(String url) {

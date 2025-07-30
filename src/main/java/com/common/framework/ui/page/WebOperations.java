@@ -17,14 +17,14 @@ public abstract class WebOperations extends WaitOperations {
      * @param url the URL
      */
     protected void goTo(String url) {
-        DriverManager.getDriver().getWebDriver().get(url);
+        DriverManager.getDriver().get(url);
     }
 
     /**
      * Refresh the page.
      */
     protected void refresh() {
-        DriverManager.getDriver().getWebDriver().navigate().refresh();
+        DriverManager.getDriver().navigate().refresh();
     }
 
     /**
@@ -55,7 +55,7 @@ public abstract class WebOperations extends WaitOperations {
 
     public boolean clickWithActionsBuilder(WebElement element) {
         try {
-            Actions builder = new Actions(DriverManager.getDriver().getWebDriver());
+            Actions builder = new Actions(DriverManager.getDriver());
             builder.moveToElement(element).click(element);
             builder.perform();
             return true;
@@ -69,7 +69,7 @@ public abstract class WebOperations extends WaitOperations {
      * Navigates back.
      */
     protected void back() {
-        DriverManager.getDriver().getWebDriver().navigate().back();
+        DriverManager.getDriver().navigate().back();
     }
 
     /**

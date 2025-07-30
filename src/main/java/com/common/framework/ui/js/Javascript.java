@@ -28,7 +28,7 @@ public final class Javascript {
      * @return the {@link JavascriptExecutor}
      */
     private static JavascriptExecutor getJavascriptExecutor() {
-        return (JavascriptExecutor) DriverManager.getDriver().getWebDriver();
+        return (JavascriptExecutor) DriverManager.getDriver();
     }
 
     public void scrollIntoView(WebElement element) {

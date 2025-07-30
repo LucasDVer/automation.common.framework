@@ -1,8 +1,8 @@
 package com.common.framework.ui.page;
 
-import com.common.framework.ui.driver.Driver;
 import com.common.framework.ui.driver.DriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
@@ -13,13 +13,13 @@ public abstract class WebPage extends WebOperations {
     private String ownUrl;
 
     protected WebPage() throws IOException {
-        Driver driver = DriverManager.getDriver();
-        initElements(driver.getWebDriver(), this);
+        WebDriver driver = DriverManager.getDriver();
+        initElements(driver, this);
         loadOwnUrl();
     }
 
     public void goToPageURL(String url) {
-        DriverManager.getDriver().getWebDriver().get(url);
+        DriverManager.getDriver().get(url);
         waitForUrlToContain(url);
     }
 

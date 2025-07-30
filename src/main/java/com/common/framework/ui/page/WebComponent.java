@@ -19,7 +19,7 @@ public abstract class WebComponent extends WebOperations {
 
     protected WebComponent(By container) {
         this.byContainer = container;
-        this.webElementContainer = DriverManager.getDriver().getWebDriver().findElement(container);
+        this.webElementContainer = DriverManager.getDriver().findElement(container);
     }
 
     public WebElement getWebElementContainer() {
