@@ -2,18 +2,16 @@ package com.common.framework.ui.page;
 
 import com.common.framework.logger.Loggable;
 import com.common.framework.ui.driver.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
+@Slf4j
 public abstract class WaitOperations implements Loggable {
 
     /**
@@ -23,7 +21,7 @@ public abstract class WaitOperations implements Loggable {
      * @return WebElement
      */
     public WebElement waitForElementToBeVisible(WebElement webElement) {
-        return getWebDriverWait().until((ExpectedConditions.visibilityOf(webElement)));
+        return getFluentWait().until((ExpectedConditions.visibilityOf(webElement)));
     }
 
     /**
@@ -33,7 +31,7 @@ public abstract class WaitOperations implements Loggable {
      * @return WebElement
      */
     public WebElement waitForElementToBeClickable(WebElement webElement) {
-        return getWebDriverWait().until((ExpectedConditions.elementToBeClickable(webElement)));
+        return getFluentWait().until((ExpectedConditions.elementToBeClickable(webElement)));
     }
 
     /**
@@ -75,7 +73,7 @@ public abstract class WaitOperations implements Loggable {
      */
     protected boolean areElementsVisible(List<WebElement> webElements) {
         try {
-            return getWebDriverWait().until(visibilityOfAllElements(webElements)).stream().allMatch(WebElement::isDisplayed);
+            return getFluentWait().until(visibilityOfAllElements(webElements)).stream().allMatch(WebElement::isDisplayed);
         } catch (TimeoutException | NoSuchElementException e) {
             error(e.getMessage());
             return false;
@@ -91,7 +89,7 @@ public abstract class WaitOperations implements Loggable {
      */
     protected boolean isTextPresent(WebElement webElement, String text) {
         try {
-            return getWebDriverWait().until(or(textToBePresentInElement(webElement, text), textToBePresentInElementValue(webElement, text)));
+            return getFluentWait().until(or(textToBePresentInElement(webElement, text), textToBePresentInElementValue(webElement, text)));
         } catch (TimeoutException | NoSuchElementException e) {
             error(e.getMessage());
             return false;
@@ -105,7 +103,7 @@ public abstract class WaitOperations implements Loggable {
      * @param by the {@link By}
      */
     public void waitForElementLocatedToBePresent(By by) {
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(by));
+        getFluentWait().until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     /**
@@ -114,7 +112,7 @@ public abstract class WaitOperations implements Loggable {
      * @param by the {@link By}
      */
     public WebElement waitForElementLocatedToBeVisible(By by) {
-        return getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(by));
+        return getFluentWait().until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
 
@@ -149,22 +147,25 @@ public abstract class WaitOperations implements Loggable {
         }
     }
 
-    private WebDriverWait getWebDriverWait() {
-        return DriverManager.getDriver().getWebDriverWait();
+    private Wait<WebDriver> getFluentWait() {
+        return new FluentWait<>(DriverManager.getDriver())
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
     }
 
     public boolean waitForUrlToContain(String url) {
-        return getWebDriverWait().until(ExpectedConditions.urlContains(url));
+        return getFluentWait().until(ExpectedConditions.urlContains(url));
     }
 
     public void waitForElementLocatedToBeInvisible(By by) {
-        getWebDriverWait().until(ExpectedConditions.invisibilityOfElementLocated(by));
+        getFluentWait().until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
 
     public <T> T waitFor(ExpectedCondition<T> condition) {
         try {
-            return getWebDriverWait().until(condition);
+            return getFluentWait().until(condition);
         } catch (TimeoutException toe) {
             error(toe.getMessage());
             throw toe;

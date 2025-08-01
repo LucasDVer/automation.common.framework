@@ -1,7 +1,6 @@
 package com.common.framework.configuration;
 
 import com.common.framework.logger.Loggable;
-import com.common.framework.ui.browser.Browser;
 import com.common.framework.ui.platform.Platform;
 
 import static java.lang.System.getProperty;
@@ -12,7 +11,6 @@ public class SystemVariablesProvider implements Loggable {
     private static final String ENVIRONMENT_KEY = "env";
     private static final String DEFAULT_ENVIRONMENT_VALUE = "qa";
     private static final String PLATFORM_KEY = "platform";
-    private static final String BROWSER_KEY = "browser";
 
     private SystemVariablesProvider() {
     }
@@ -33,10 +31,5 @@ public class SystemVariablesProvider implements Loggable {
     public static Platform getPlatformValue() {
         String platformValue = getPropertyValue(PLATFORM_KEY);
         return platformValue == null ? Platform.WEB : Platform.valueOf(platformValue.toUpperCase());
-    }
-
-    public static Browser getBrowserValue() {
-        String browserValue = getPropertyValue(BROWSER_KEY);
-        return browserValue == null ? Browser.CHROME : Browser.valueOf(browserValue.toUpperCase());
     }
 }
