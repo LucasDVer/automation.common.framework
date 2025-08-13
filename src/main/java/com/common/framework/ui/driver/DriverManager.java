@@ -22,7 +22,7 @@ public final class DriverManager implements Loggable {
      *
      * @throws MalformedURLException if the URL of the remote server is invalid
      */
-    public static void populateDriver() throws MalformedURLException {
+    public static void populateDriver() {
         if (DRIVERS_CONSTANT.get() == null) {
             DRIVERS_CONSTANT.set(Driver.getDriverByBrowser());
         }
@@ -34,7 +34,7 @@ public final class DriverManager implements Loggable {
      *
      * @return the {@link Driver}
      */
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver(){
         return DRIVERS_CONSTANT.get();
     }
 
