@@ -4,15 +4,13 @@ import com.common.framework.ui.driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.io.IOException;
-
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 public abstract class WebPage extends WebOperations {
 
     private String ownUrl;
 
-    protected WebPage() throws IOException {
+    protected WebPage(){
         WebDriver driver = DriverManager.getDriver();
         initElements(driver, this);
         loadOwnUrl();
@@ -31,7 +29,7 @@ public abstract class WebPage extends WebOperations {
         this.ownUrl = url;
     }
 
-    protected abstract void loadOwnUrl() throws IOException;
+    protected abstract void loadOwnUrl();
 
     protected abstract By getPageLocator();
 
