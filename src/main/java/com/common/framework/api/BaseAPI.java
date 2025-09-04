@@ -17,7 +17,7 @@ public abstract class BaseAPI {
     protected  Response doGet(String path) { return RestAssured.get(baseUrl + specificPath + path); }
 
     protected void loadBaseUrl(){
-        setBaseUrl(PropertiesProvider.getPropertyValue("hostUrl"));
+        setBaseUrl(PropertiesProvider.getFilePropertyValue("hostUrl"));
     }
 
     protected abstract void loadSpecificPath();

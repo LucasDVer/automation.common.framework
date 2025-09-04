@@ -18,7 +18,7 @@ public class PropertiesProvider {
         return properties;
     }
 
-    public static String getPropertyValue(String propertyName) {
+    public static String getFilePropertyValue(String propertyName) {
         return getInstance().getProperty(propertyName);
     }
 

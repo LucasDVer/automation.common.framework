@@ -15,7 +15,7 @@ public class SystemVariablesProvider implements Loggable {
     private SystemVariablesProvider() {
     }
 
-    public static String getPropertyValue(String key) {
+    public static String getSystemPropertyValue(String key) {
         String property = getProperty(key);
         if (property == null) {
             property = getenv(key);
@@ -24,12 +24,12 @@ public class SystemVariablesProvider implements Loggable {
     }
 
     public static String getEnvironmentValue() {
-        String environmentValue = getPropertyValue(ENVIRONMENT_KEY);
+        String environmentValue = getSystemPropertyValue(ENVIRONMENT_KEY);
         return environmentValue == null ? DEFAULT_ENVIRONMENT_VALUE : environmentValue;
     }
 
     public static Platform getPlatformValue() {
-        String platformValue = getPropertyValue(PLATFORM_KEY);
+        String platformValue = getSystemPropertyValue(PLATFORM_KEY);
         return platformValue == null ? Platform.WEB : Platform.valueOf(platformValue.toUpperCase());
     }
 }
